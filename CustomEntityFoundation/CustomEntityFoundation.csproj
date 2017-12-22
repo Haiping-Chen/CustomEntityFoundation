@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Haiping Chen</Authors>
+    <Company>Personal</Company>
+    <Description>Custom Entity Foundation (CEF) is a high level customized entity library wirtten in C# .Net Core. CEF is with high flexible &amp; business oriented abstract layer. It could be used in any .net project to serve as an entity service.</Description>
+    <Copyright>Personal</Copyright>
+    <PackageProjectUrl>https://github.com/Haiping-Chen/CustomEntityFoundation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Haiping-Chen/CustomEntityFoundation</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>Build in view module to filter entities.</PackageReleaseNotes>
+    <PackageTags>EntityFramework, EntityFrameworkCore, Custom Entity, Content Management</PackageTags>
+    <Version>2.1.0</Version>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <FileVersion>2.1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.BootKit" Version="1.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+</Project>

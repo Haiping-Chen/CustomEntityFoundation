@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/Haiping-Chen/CustomEntityFoundation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Haiping-Chen/CustomEntityFoundation</RepositoryUrl>
+    <Authors>Haiping Chen</Authors>
+    <Company>Personal</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Data mock library for CustomEntityFoundation.</Description>
+    <PackageTags>CustomEntityFoundation Mock</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CustomEntityFoundation" Version="1.3.3" />
+  </ItemGroup>
+
+</Project>
