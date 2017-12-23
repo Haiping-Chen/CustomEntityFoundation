@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CustomEntityFoundation.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace CustomEntityFoundation.RestApi.Bundles
         {
             var bundle = dc.Bundle.Find(bundleId);
 
-            return bundle.QueryRecords(dc);
+            var records = bundle.QueryRecords(dc).ToList();
+
+            return records.HidePassword();
         }
     }
 }

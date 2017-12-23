@@ -23,7 +23,7 @@ namespace CustomEntityFoundation.Views
 
         public static View LoadDefinition(this View viewModel, EntityDbContext dc)
         {
-            var view = dc.Table<View>()
+            var view = dc.View
                 .Include(x => x.Bundle).ThenInclude(x => x.Fields)
                 .Include(x => x.Columns)
                 .Include(x => x.Filters)

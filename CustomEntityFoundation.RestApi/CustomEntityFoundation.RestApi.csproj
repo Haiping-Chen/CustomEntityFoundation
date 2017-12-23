@@ -11,10 +11,10 @@
     <RepositoryType>Github</RepositoryType>
     <PackageTags>CustomEntityFoundation</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReleaseNotes>Build in view module to filter entities.</PackageReleaseNotes>
-    <Version>1.3.0</Version>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <FileVersion>1.3.0.0</FileVersion>
+    <PackageReleaseNotes>Hide value for property marked as password datatype.</PackageReleaseNotes>
+    <Version>1.3.1</Version>
+    <AssemblyVersion>1.3.1.0</AssemblyVersion>
+    <FileVersion>1.3.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -40,7 +40,7 @@ namespace CustomEntityFoundation.WebStarter
 
             // Sqlite
             options.Database = "Sqlite";
-            options.ConnectionString = "Data Source=|DataDirectory|\\cef.db";
+            options.ConnectionString = "Data Source=|DataDirectory|\\Content.db";
             options.ConnectionString = options.ConnectionString.Replace("|DataDirectory|", options.ContentRootPath);
             EntityDbContext.Options = options;
         }

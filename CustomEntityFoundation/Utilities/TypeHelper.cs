@@ -17,7 +17,7 @@ namespace CustomEntityFoundation.Utilities
 
             if (property.PropertyType.Equals(typeof(String)))
             {
-                property.SetValue(obj, value.ToString(), null);
+                property.SetValue(obj, value?.ToString(), null);
             }
             /*else if (property.PropertyType.IsEnum)
             {

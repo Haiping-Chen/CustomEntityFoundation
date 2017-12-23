@@ -82,7 +82,12 @@ namespace CustomEntityFoundation.Bundles
 
         public IQueryable<BundleDbRecord> QueryRecords(EntityDbContext dc)
         {
-            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(EntityDbContext.Assembles).First(x => x.Name == EntityName);
+            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(EntityDbContext.Assembles).FirstOrDefault(x => x.Name == EntityName);
+
+            if(type == null)
+            {
+                throw new Exception($"Can't find entity: {EntityName}");
+            }
 
             return dc.Table(EntityName).Where(x => (x as BundleDbRecord).BundleId == Id).Select(x => x.ToObject(type) as BundleDbRecord);
         }

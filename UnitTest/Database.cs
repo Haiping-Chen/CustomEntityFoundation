@@ -23,7 +23,7 @@ namespace CustomEntityFoundation.UnitTest
 
             // Sqlite
             options.Database = "Sqlite";
-            options.ConnectionString = $"Data Source={options.ContentRootPath}\\cef.db";
+            options.ConnectionString = $"Data Source={options.ContentRootPath}\\Content.db";
             EntityDbContext.Options = options;
 
             dc = new EntityDbContext();

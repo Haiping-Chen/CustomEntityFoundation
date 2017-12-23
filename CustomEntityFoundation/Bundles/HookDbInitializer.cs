@@ -11,7 +11,7 @@ namespace CustomEntityFoundation.Bundles
 {
     public class HookDbInitializer : IHookDbInitializer
     {
-        public int Priority => 100;
+        public int Priority => 10;
 
         public void Load(IConfiguration config, EntityDbContext dc)
         {

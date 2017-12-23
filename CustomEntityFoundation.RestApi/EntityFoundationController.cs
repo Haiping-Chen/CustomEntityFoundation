@@ -5,7 +5,9 @@ using System.IO;
 
 namespace CustomEntityFoundation.RestApi
 {
+#if !DEBUG
     [Authorize]
+#endif
     [Produces("application/json")]
     [Route("cef/[controller]")]
     public abstract class EntityFoundationController : ControllerBase
