@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using CustomEntityFoundation.Utilities;
 using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Bundles;
+using Newtonsoft.Json.Linq;
+using CustomEntityFoundation.Fields;
 
 namespace CustomEntityFoundation.RestApi.Bundles
 {
@@ -37,7 +39,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         [HttpGet("{bundleId}")]
         public IActionResult GetBundleSchema([FromRoute] string bundleId)
         {
-            var bundleEntity = dc.Bundle.Find(bundleId);
+            var bundleEntity = dc.Bundle.Include(x => x.Actions).First(x => x.Id == bundleId);
 
             if (bundleEntity == null)
             {
@@ -45,6 +47,14 @@ namespace CustomEntityFoundation.RestApi.Bundles
             }
 
             bundleEntity.Fields = bundleEntity.GetFields(dc);
+
+            bundleEntity.Fields.ForEach(field => {
+
+                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", EntityDbContext.Assembles);
+                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", EntityDbContext.Assembles) as FieldRepository;
+
+                field.Records = new List<Object>() { fieldInstance.GetFieldData(null) };
+            });
 
             return Ok(bundleEntity);
         }

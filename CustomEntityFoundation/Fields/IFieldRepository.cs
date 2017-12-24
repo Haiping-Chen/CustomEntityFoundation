@@ -7,7 +7,7 @@ namespace CustomEntityFoundation.Fields
 {
     public interface IFieldRepository
     {
-        List<JObject> Extract(String entityId, FieldInBundle field, JToken jo, Type joType);
+        List<Object> Extract(String entityId, FieldInBundle field, JToken jo, Type joType);
         Object ToBusinessObject(FieldInBundle field);
     }
 }

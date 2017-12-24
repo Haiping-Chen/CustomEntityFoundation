@@ -33,6 +33,9 @@ namespace CustomEntityFoundation.Bundles
         [ForeignKey("BundleId")]
         public List<FieldInBundle> Fields { get; set; }
 
+        [ForeignKey("BundleId")]
+        public List<ActionInBundle> Actions { get; set; }
+
         public override bool IsExist<T>(EntityDbContext dc)
         {
             return dc.Table<Bundle>().Any(x => x.EntityName == EntityName && x.Name == Name);
@@ -71,7 +74,7 @@ namespace CustomEntityFoundation.Bundles
                     var field = (property as EntityPropertyAsField).GetBundleField();
                     field.Caption = field.Name;
                     field.BundleId = Id;
-                    field.IsEntityProperty = true;
+                    field.IsBuiltIn = true;
                     field.Required = p.GetCustomAttribute<RequiredAttribute>() != null;
                     Fields.Insert(0, field);
                 }
@@ -129,7 +132,7 @@ namespace CustomEntityFoundation.Bundles
                 {
                     var fieldInstance = (FieldRepository)Activator.CreateInstance(fieldType);
                     fieldInstance.BundleFieldId = field.Id;
-                    field.FieldRecords = fieldInstance.Extract(record.Id, field, jEntity[field.Name], fieldType);
+                    field.Records = fieldInstance.Extract(record.Id, field, jEntity[field.Name], fieldType);
                 }
             });
 

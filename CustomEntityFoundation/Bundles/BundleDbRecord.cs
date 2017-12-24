@@ -51,7 +51,7 @@ namespace CustomEntityFoundation.Bundles
                 .ForEach(field =>
                 {
                     var repository = new FieldRepository { BundleFieldId = field.Id, EntityId = Id };
-                    field.FieldRecords = repository.Load(dc, entityName, field.FieldTypeName);
+                    field.Records = repository.Load(dc, entityName, field.FieldTypeName);
                 });
         }
 
@@ -60,11 +60,11 @@ namespace CustomEntityFoundation.Bundles
             FieldTypeAttribute fieldTypeAttribute = fieldType.BaseType.GetCustomAttributes(typeof(FieldTypeAttribute), false).First() as FieldTypeAttribute;
             String fieldTypeName = fieldTypeAttribute.GetFieldTypeName();
 
-            Fields.Where(x => x.FieldTypeName == fieldTypeName && x.FieldRecords != null)
+            Fields.Where(x => x.FieldTypeName == fieldTypeName && x.Records != null)
                 .ToList()
                 .ForEach(field =>
                 {
-                    field.FieldRecords.ForEach(data =>
+                    field.Records.ForEach(data =>
                     {
                         var repository = data.ToObject(fieldType);
                         dc.Add(repository);
@@ -114,7 +114,7 @@ namespace CustomEntityFoundation.Bundles
             FieldTypeAttribute fieldTypeAttribute = fieldType.BaseType.GetCustomAttributes(typeof(FieldTypeAttribute), false).First() as FieldTypeAttribute;
             String fieldTypeName = fieldTypeAttribute.GetFieldTypeName();
 
-            Fields.Where(x => x.FieldTypeName == fieldTypeName && x.FieldRecords != null)
+            Fields.Where(x => x.FieldTypeName == fieldTypeName && x.Records != null)
                 .ToList()
                 .ForEach(field =>
                 {
@@ -128,7 +128,7 @@ namespace CustomEntityFoundation.Bundles
         {
             LoadFieldsDefinition(dc);
 
-            Fields.Where(x => x.FieldTypeName == GetFieldTypeName<TFieldRepository>() && x.FieldRecords != null)
+            Fields.Where(x => x.FieldTypeName == GetFieldTypeName<TFieldRepository>() && x.Records != null)
                 .ToList()
                 .ForEach(field =>
                 {

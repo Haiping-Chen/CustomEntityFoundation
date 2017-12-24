@@ -12,8 +12,5 @@ namespace CustomEntityFoundation.Nodes
         [MaxLength(500, ErrorMessage = "Description cannot be longer than 500 characters.")]
         [EntityPropertyAsField("Description", "Text")]
         public String Description { get; set; }
-
-        [DataType(DataType.Password)]
-        public String Password { get; set; }
     }
 }

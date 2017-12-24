@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using CustomEntityFoundation.Utilities;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CustomEntityFoundation.Fields
     {
         public Boolean Value { get; set; }
 
-        protected override FieldRepository ConvertToField(JToken jToken, Type joType)
+        public override FieldRepository ConvertToField(JToken jToken, Type joType)
         {
             return new BooleanField
             {
@@ -19,7 +20,7 @@ namespace CustomEntityFoundation.Fields
             };
         }
 
-        protected override object GetFieldData(JObject data)
+        public override object GetFieldData(Object data)
         {
             return data.ToObject<BooleanField>()?.Value;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using CustomEntityFoundation.Utilities;
 using Newtonsoft.Json.Linq;
 
 namespace CustomEntityFoundation.Fields
@@ -14,7 +15,7 @@ namespace CustomEntityFoundation.Fields
         [Required]
         public String RefEntityId { get; set; }
 
-        protected override FieldRepository ConvertToField(JToken jToken, Type joType)
+        public override FieldRepository ConvertToField(JToken jToken, Type joType)
         {
             return new EntityReferenceField
             {
@@ -22,7 +23,7 @@ namespace CustomEntityFoundation.Fields
             };
         }
 
-        protected override object GetFieldData(JObject data)
+        public override object GetFieldData(Object data)
         {
             return data.ToObject<EntityReferenceField>()?.RefEntityId;
         }

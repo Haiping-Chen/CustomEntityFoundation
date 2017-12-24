@@ -37,7 +37,7 @@ namespace CustomEntityFoundation.Fields
         public Boolean IsMultiple { get; set; }
 
         [NotMapped]
-        public Boolean IsEntityProperty { get; set; }
+        public Boolean IsBuiltIn { get; set; }
 
         /// <summary>
         /// Only for EntityReference field type
@@ -46,7 +46,7 @@ namespace CustomEntityFoundation.Fields
         public string RefBundleId { get; set; }
 
         [NotMapped]
-        public List<JObject> FieldRecords { get; set; }
+        public List<Object> Records { get; set; }
 
         public override bool IsExist<T>(EntityDbContext dc)
         {

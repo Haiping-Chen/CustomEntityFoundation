@@ -26,11 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomEntityFoundation\CustomEntityFoundation.csproj" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <ProjectReference Include="..\CustomEntityFoundation\CustomEntityFoundation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,6 @@ namespace CustomEntityFoundation.UnitTest
     [TestClass]
     public class FieldInBundleTest : Database
     {
-        [TestMethod]
         public void AddFieldToBundleTest()
         {
             var input = new { BundleId = PizzaType.BUNDLE_ID_PIZZA_TYPE, FieldTypeName = "Text", Name = "NewField", Caption = "NewField" };

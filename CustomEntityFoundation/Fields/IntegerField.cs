@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using CustomEntityFoundation.Utilities;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ namespace CustomEntityFoundation.Fields
     {
         public Int32 Number { get; set; }
 
-        protected override FieldRepository ConvertToField(JToken jToken, Type joType)
+        public override FieldRepository ConvertToField(JToken jToken, Type joType)
         {
             return new IntegerField
             {
@@ -20,7 +21,7 @@ namespace CustomEntityFoundation.Fields
             };
         }
 
-        protected override object GetFieldData(JObject data)
+        public override object GetFieldData(Object data)
         {
             var fieldData = data.ToObject<IntegerField>();
             return fieldData.Number;

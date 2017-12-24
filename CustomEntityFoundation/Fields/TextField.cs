@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using CustomEntityFoundation.Entities;
 using System.Linq;
+using CustomEntityFoundation.Utilities;
 
 namespace CustomEntityFoundation.Fields
 {
@@ -15,7 +16,7 @@ namespace CustomEntityFoundation.Fields
         [MaxLength(512)]
         public String Text { get; set; }
 
-        protected override FieldRepository ConvertToField(JToken jToken, Type joType)
+        public override FieldRepository ConvertToField(JToken jToken, Type joType)
         {
             return new TextField
             {
@@ -23,9 +24,9 @@ namespace CustomEntityFoundation.Fields
             };
         }
 
-        protected override object GetFieldData(JObject data)
+        public override object GetFieldData(Object data)
         {
-            return data.ToObject<TextField>()?.Text;
+            return data == null ? String.Empty : data.ToObject<TextField>()?.Text;
         }
     }
 }

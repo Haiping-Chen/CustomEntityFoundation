@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using CustomEntityFoundation.Entities;
+using CustomEntityFoundation.Utilities;
 using Newtonsoft.Json.Linq;
 
 namespace CustomEntityFoundation.Fields
@@ -14,7 +15,7 @@ namespace CustomEntityFoundation.Fields
         [DataType(DataType.DateTime)]
         public DateTime DateTime { get; set; }
 
-        protected override FieldRepository ConvertToField(JToken jToken, Type joType)
+        public override FieldRepository ConvertToField(JToken jToken, Type joType)
         {
             return new DateTimeField
             {
@@ -22,7 +23,7 @@ namespace CustomEntityFoundation.Fields
             };
         }
 
-        protected override object GetFieldData(JObject data)
+        public override object GetFieldData(Object data)
         {
             return data.ToObject<DateTimeField>()?.DateTime;
         }

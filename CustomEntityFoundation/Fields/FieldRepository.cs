@@ -42,15 +42,15 @@ namespace CustomEntityFoundation.Fields
                 .ToList();
         }
 
-        public List<JObject> Load(EntityDbContext dc, String entityName, String fieldTypeName)
+        public List<Object> Load(EntityDbContext dc, String entityName, String fieldTypeName)
         {
             var fields = dc.Table($"{entityName}{fieldTypeName}Field").Where(x => (x as FieldRepository).EntityId == EntityId && (x as FieldRepository).BundleFieldId == BundleFieldId).ToList();
-            return fields.Select(x => JObject.FromObject(x)).ToList();
+            return fields.Select(x => x).ToList();
         }
 
-        public List<JObject> Extract(String entityId, FieldInBundle field, JToken jo, Type joType)
+        public List<Object> Extract(String entityId, FieldInBundle field, JToken jo, Type joType)
         {
-            var objects = new List<JObject>();
+            var objects = new List<Object>();
 
             if (jo == null) return objects;
 
@@ -82,7 +82,7 @@ namespace CustomEntityFoundation.Fields
             return objects;
         }
 
-        protected virtual FieldRepository ConvertToField(JToken jToken, Type joType)
+        public virtual FieldRepository ConvertToField(JToken jToken, Type joType)
         {
             return jToken.ToObject(joType) as FieldRepository;
         }
@@ -91,7 +91,7 @@ namespace CustomEntityFoundation.Fields
         {
             List<Object> jo = new List<Object>();
 
-            field.FieldRecords.ForEach(data =>
+            field.Records.ForEach(data =>
             {
                 var record = GetFieldData(data);
                 jo.Add(record);
@@ -100,15 +100,16 @@ namespace CustomEntityFoundation.Fields
             return field.IsMultiple ? jo : jo.FirstOrDefault();
         }
 
-        protected virtual Object GetFieldData(JObject data)
+        public virtual Object GetFieldData(Object data)
         {
-            data.Remove("BundleFieldId");
-            data.Remove("EntityId");
-            data.Remove("UpdatedTime");
-            data.Remove("Status");
-            data.Remove("Id");
+            var d = JObject.FromObject(data);
+            d.Remove("BundleFieldId");
+            d.Remove("EntityId");
+            d.Remove("UpdatedTime");
+            d.Remove("Status");
+            d.Remove("Id");
 
-            return data;
+            return d;
         }
     }
 }
