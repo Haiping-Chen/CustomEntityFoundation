@@ -98,5 +98,13 @@ var bo = loadedNode.ToBusinessObject(dc, bundle.EntityName);
 ````
 ### Benchmarks
 #### Read
+
+| Name                   | Milliseconds | Total |
+|------------------------|--------------|---------|
+| LoadRecord | 18795        | 100 |
+| ToBusinessObject   | 589          | 2000    |  
+
 #### Write
 
+### Feedback
+Please contact <haiping008@gmail.com> if you have any questions.
