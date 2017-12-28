@@ -16,7 +16,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         [HttpGet("{bundleId}")]
         public PageResult<BundleDbRecord> GetRecordsInBundle([FromRoute] String bundleId, [FromQuery] int page = 1, [FromQuery] int size = 10)
         {
-            var bundle = dc.Bundle.Find(bundleId);
+            var bundle = dc.Table<Bundle>().Find(bundleId);
 
             var query = bundle.QueryRecords(dc);
 
@@ -37,7 +37,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         [HttpPost("{bundleId}")]
         public String SaveRecordInBundle([FromRoute] String bundleId, [FromBody] JObject record)
         {
-            var bundle = dc.Bundle.Include(x => x.Fields).First(x => x.Id == bundleId);
+            var bundle = dc.Table<Bundle>().Include(x => x.Fields).First(x => x.Id == bundleId);
 
             BundleDbRecord node = null;
 

@@ -10,12 +10,12 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest
 {
     [TestClass]
-    public class FieldInBundleTest : Database
+    public class FieldInBundleTest : TestEssential
     {
         public void AddFieldToBundleTest()
         {
             var input = new { BundleId = PizzaType.BUNDLE_ID_PIZZA_TYPE, FieldTypeName = "Text", Name = "NewField", Caption = "NewField" };
-            var bundle = dc.Bundle.Find(input.BundleId);
+            var bundle = dc.Table<Bundle>().Find(input.BundleId);
 
             FieldInBundle newField = null;
 

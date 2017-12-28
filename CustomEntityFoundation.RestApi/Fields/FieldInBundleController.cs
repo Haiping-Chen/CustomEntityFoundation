@@ -18,7 +18,7 @@ namespace CustomEntityFoundation.RestApi.Fields
         [HttpGet("{fieldIdInBundle}")]
         public FieldInBundle Get([FromRoute] String fieldIdInBundle)
         {
-            return dc.FieldInBundle.Find(fieldIdInBundle);
+            return dc.Table<FieldInBundle>().Find(fieldIdInBundle);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace CustomEntityFoundation.RestApi.Fields
         [HttpPost]
         public string Add(FieldInBundle field)
         {
-            var bundle = dc.Bundle.Find(field.BundleId);
+            var bundle = dc.Table<Bundle>().Find(field.BundleId);
             string id = String.Empty;
 
             dc.DbTran(() => {
@@ -49,8 +49,8 @@ namespace CustomEntityFoundation.RestApi.Fields
         public bool Delete(string fieldIdInBundle)
         {
             dc.DbTran(() => {
-                var fieldInBundle = dc.FieldInBundle.Find(fieldIdInBundle);
-                dc.FieldInBundle.Remove(fieldInBundle);
+                var fieldInBundle = dc.Table<FieldInBundle>().Find(fieldIdInBundle);
+                dc.Table<FieldInBundle>().Remove(fieldInBundle);
             });
 
             return true;

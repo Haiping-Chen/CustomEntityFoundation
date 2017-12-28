@@ -7,7 +7,7 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest
 {
     [TestClass]
-    public class BundleTest : Database
+    public class BundleTest : TestEssential
     {
         [TestMethod]
         public void CreateBundelTest()
@@ -22,7 +22,7 @@ namespace CustomEntityFoundation.UnitTest
                 Id = Id
             };
 
-            int effected = dc.DbTran(() => dc.Bundle.Add(bundle));
+            int effected = dc.DbTran(() => dc.Table<Bundle>().Add(bundle));
 
             Assert.IsTrue(effected == 1);
         }

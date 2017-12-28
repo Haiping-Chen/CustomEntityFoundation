@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomEntityFoundation\CustomEntityFoundation.csproj" />
+    <ProjectReference Include="..\CustomEntityFoundation\CustomEntityFoundation.Core.csproj" />
   </ItemGroup>
 
 </Project>

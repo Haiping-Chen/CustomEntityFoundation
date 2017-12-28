@@ -48,7 +48,7 @@ namespace CustomEntityFoundation.Fields
         [NotMapped]
         public List<Object> Records { get; set; }
 
-        public override bool IsExist<T>(EntityDbContext dc)
+        public override bool IsExist<T>(Database dc)
         {
             return dc.Table<FieldInBundle>().Any(x => x.BundleId == BundleId && x.Name == Name);
         }

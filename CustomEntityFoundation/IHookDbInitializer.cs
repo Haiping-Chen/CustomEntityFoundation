@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using EntityFrameworkCore.BootKit;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +22,6 @@ namespace CustomEntityFoundation
         /// <param name="config"></param>
         /// <param name="dc"></param>
         /// <returns></returns>
-        void Load(IConfiguration config, EntityDbContext dc);
+        void Load(IConfiguration config, Database dc);
     }
 }

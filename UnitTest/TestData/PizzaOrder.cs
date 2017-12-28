@@ -11,7 +11,7 @@ using System.Text;
 
 namespace CustomEntityFoundation.UnitTest.TestData
 {
-    public class PizzaOrder : Database
+    public class PizzaOrder : TestEssential
     {
         public static String BUNDLE_ID_PIZZA_ORDER = "81e39849-8cde-49f3-8e70-904781d1fd7f";
 
@@ -64,7 +64,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
 
             if (!bundle.IsExist<Bundle>(dc))
             {
-                int rows = dc.DbTran(() => dc.Bundle.Add(bundle));
+                int rows = dc.DbTran(() => dc.Table<Bundle>().Add(bundle));
             }
         }
 
@@ -89,7 +89,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
                 Amount = 3
             });
 
-            var bundle = dc.Bundle.Include(x => x.Fields).First(x => x.Id == BUNDLE_ID_PIZZA_ORDER);
+            var bundle = dc.Table<Bundle>().Include(x => x.Fields).First(x => x.Id == BUNDLE_ID_PIZZA_ORDER);
 
             BundleDbRecord node = null;
 
@@ -98,7 +98,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
                 node = bundle.AddRecord(dc, record);
             });
 
-            var loadedNode = dc.Bundle.Find(node.BundleId).LoadRecord(dc, node.Id);
+            var loadedNode = dc.Table<Bundle>().Find(node.BundleId).LoadRecord(dc, node.Id);
 
             Assert.IsTrue(loadedNode.Status == EntityStatus.Active);
             Assert.IsTrue(loadedNode.UpdatedTime.Date == DateTime.UtcNow.Date);

@@ -36,12 +36,12 @@ namespace CustomEntityFoundation.Bundles
         [ForeignKey("BundleId")]
         public List<ActionInBundle> Actions { get; set; }
 
-        public override bool IsExist<T>(EntityDbContext dc)
+        public override bool IsExist<T>(Database dc)
         {
             return dc.Table<Bundle>().Any(x => x.EntityName == EntityName && x.Name == Name);
         }
 
-        public BundleDbRecord GetEntityInstance(EntityDbContext dc)
+        public BundleDbRecord GetEntityInstance(Database dc)
         {
             var instance = Activator.CreateInstance(GetEntityType(dc)) as BundleDbRecord;
             instance.BundleId = Id;
@@ -49,10 +49,10 @@ namespace CustomEntityFoundation.Bundles
             return instance;
         }
 
-        public Type GetEntityType(EntityDbContext dc)
+        public Type GetEntityType(Database dc)
         {
             var entityName = dc.Table<Bundle>().Find(Id).EntityName;
-            var entityType = TypeHelper.GetClassesWithInterface<IBundlableEntity>(EntityDbContext.Assembles).FirstOrDefault(x => x.Name == entityName);
+            var entityType = TypeHelper.GetClassesWithInterface<IBundlableEntity>(CefOptions.Assembles).FirstOrDefault(x => x.Name == entityName);
             return entityType;
         }
 
@@ -60,11 +60,11 @@ namespace CustomEntityFoundation.Bundles
         /// Get customized fields and entity properties
         /// </summary>
         /// <returns></returns>
-        public List<FieldInBundle> GetFields(EntityDbContext dc)
+        public List<FieldInBundle> GetFields(Database dc)
         {
             var entityType = GetEntityType(dc);
 
-            Fields = dc.FieldInBundle.Where(x => x.BundleId == Id).ToList();
+            Fields = dc.Table<FieldInBundle>().Where(x => x.BundleId == Id).ToList();
             
             entityType.GetProperties().ToList().ForEach(p =>
             {
@@ -83,9 +83,9 @@ namespace CustomEntityFoundation.Bundles
             return Fields;
         }
 
-        public IQueryable<BundleDbRecord> QueryRecords(EntityDbContext dc)
+        public IQueryable<BundleDbRecord> QueryRecords(Database dc)
         {
-            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(EntityDbContext.Assembles).FirstOrDefault(x => x.Name == EntityName);
+            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(CefOptions.Assembles).FirstOrDefault(x => x.Name == EntityName);
 
             if(type == null)
             {
@@ -95,7 +95,7 @@ namespace CustomEntityFoundation.Bundles
             return dc.Table(EntityName).Where(x => (x as BundleDbRecord).BundleId == Id).Select(x => x.ToObject(type) as BundleDbRecord);
         }
 
-        public BundleDbRecord LoadRecord(EntityDbContext dc, String entityId)
+        public BundleDbRecord LoadRecord(Database dc, String entityId)
         {
             var entityType = GetEntityType(dc);
             var record = dc.Find(entityType, entityId) as BundleDbRecord;
@@ -109,9 +109,9 @@ namespace CustomEntityFoundation.Bundles
         /// </summary>
         /// <param name="dc"></param>
         /// <param name="jEntity"></param>
-        public BundleDbRecord AddRecord(EntityDbContext dc, JObject jEntity)
+        public BundleDbRecord AddRecord(Database dc, JObject jEntity)
         {
-            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(EntityDbContext.Assembles).FirstOrDefault(x => x.Name == EntityName);
+            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(CefOptions.Assembles).FirstOrDefault(x => x.Name == EntityName);
 
             // extract data to main object, fill field record later.
             var record = jEntity.ToObject(type) as BundleDbRecord;
@@ -123,7 +123,7 @@ namespace CustomEntityFoundation.Bundles
             // fill custom fields
             record.Fields.ForEach(field =>
             {
-                var fieldType = TypeHelper.GetClassesWithInterface<IFieldRepository>(EntityDbContext.Assembles).FirstOrDefault(x => x.Name == field.FieldTypeName + "Field");
+                var fieldType = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles).FirstOrDefault(x => x.Name == field.FieldTypeName + "Field");
                 if (fieldType == null)
                 {
                     Console.WriteLine($"{field.FieldTypeName} field not found. Ignored {field.Name} column. {field.Id}");

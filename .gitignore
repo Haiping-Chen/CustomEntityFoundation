@@ -288,3 +288,4 @@ __pycache__/
 *.xsd.cs
 /cef.db
 /Content.db
+/App_Data/content.db

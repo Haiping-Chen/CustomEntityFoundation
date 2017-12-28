@@ -10,7 +10,7 @@ using System.Text;
 
 namespace CustomEntityFoundation.UnitTest.TestData
 {
-    public class PizzaType : Database
+    public class PizzaType : TestEssential
     {
         public static String BUNDLE_ID_PIZZA_TYPE = "fa623a3a-5e8d-4ad5-a3f0-dff4e48b3750";
         public static String BUNDLE_ID_PIZZA_TYPE_1 = "3e7823f3-7672-42de-b4a1-300192702a02";
@@ -48,7 +48,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
 
             if (!bundle.IsExist<Bundle>(dc))
             {
-                int rows = dc.DbTran(() => dc.Bundle.Add(bundle));
+                int rows = dc.DbTran(() => dc.Table<Bundle>().Add(bundle));
             }
         }
 
@@ -101,7 +101,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
                 }
             });
 
-            var bundle = dc.Bundle.Include(x => x.Fields).First(x => x.Id == BUNDLE_ID_PIZZA_TYPE);
+            var bundle = dc.Table<Bundle>().Include(x => x.Fields).First(x => x.Id == BUNDLE_ID_PIZZA_TYPE);
 
             BundleDbRecord node1 = null;
             BundleDbRecord node2 = null;
@@ -112,7 +112,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
                 node2 = bundle.AddRecord(dc, record2);
             });
 
-            var loadedNode1 = dc.Bundle.Find(node1.BundleId).LoadRecord(dc, node1.Id);
+            var loadedNode1 = dc.Table<Bundle>().Find(node1.BundleId).LoadRecord(dc, node1.Id);
             Assert.IsTrue(loadedNode1.Name == record1["Name"].ToString());
 
             var bo1 = loadedNode1.ToBusinessObject(dc, bundle.EntityName);
@@ -124,7 +124,7 @@ namespace CustomEntityFoundation.UnitTest.TestData
             }
             Assert.IsTrue(bo1["Sale"].ToString() == record1["Sale"].ToString());
 
-            var loadedNode2 = dc.Bundle.Find(node2.BundleId).LoadRecord(dc, node2.Id);
+            var loadedNode2 = dc.Table<Bundle>().Find(node2.BundleId).LoadRecord(dc, node2.Id);
             Assert.IsTrue(loadedNode2.Name == record2["Name"].ToString());
         }
     }

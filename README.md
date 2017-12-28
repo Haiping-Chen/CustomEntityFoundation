@@ -24,7 +24,7 @@ Install [CEF REST API](https://www.nuget.org/packages/CustomEntityFoundation.Res
 Install-Package CustomEntityFoundation.RestApi
 ````
 ### Developer References & Documents
-For more detail please refer to [Developer Document](https://readthedocs.org/projects/customentityfoundation/)
+For more detail please refer to [Developer Document](http://customentityfoundation.readthedocs.io/en/latest/)
 ### Usage
 #### Construct Business Object Structure
 ```cs
@@ -84,7 +84,7 @@ var record = JObject.FromObject(new
 // Persistent object to storage
 int rows = dc.DbTran(() =>
 {
-	node = bundle.AddRecord(dc, record);
+    node = bundle.AddRecord(dc, record);
 });
 ````
 #### Load Data

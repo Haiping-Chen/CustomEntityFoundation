@@ -1,5 +1,6 @@
 ﻿using CustomEntityFoundation.Bundles;
 using CustomEntityFoundation.Utilities;
+using EntityFrameworkCore.BootKit;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,7 +13,7 @@ namespace CustomEntityFoundation.Views
 {
     public static class ViewExtension
     {
-        public static bool Add(this View viewModel, EntityDbContext dc)
+        public static bool Add(this View viewModel, Database dc)
         {
             if (viewModel.IsExist<View>(dc)) return false;
 
@@ -21,15 +22,15 @@ namespace CustomEntityFoundation.Views
             return true;
         }
 
-        public static View LoadDefinition(this View viewModel, EntityDbContext dc)
+        public static View LoadDefinition(this View viewModel, Database dc)
         {
-            var view = dc.View
+            var view = dc.Table<View>()
                 .Include(x => x.Bundle).ThenInclude(x => x.Fields)
                 .Include(x => x.Columns)
                 .Include(x => x.Filters)
                 .First(x => x.Id == viewModel.Id);
 
-            var bundleEntity = dc.Bundle.Include(x => x.Fields).FirstOrDefault(m => m.Id == view.BundleId);
+            var bundleEntity = dc.Table<Bundle>().Include(x => x.Fields).FirstOrDefault(m => m.Id == view.BundleId);
             view.Filters.ForEach(filter => {
                 filter.BundleFieldId = bundleEntity.Fields.FirstOrDefault(x => x.Name == filter.FieldName).Id;
                 filter.Field = bundleEntity.Fields.FirstOrDefault(x => x.Name == filter.FieldName);
@@ -44,7 +45,7 @@ namespace CustomEntityFoundation.Views
         /// <param name="dm"></param>
         /// <param name="dc"></param>
         /// <returns></returns>
-        public static async Task LoadRecords(this View dm, EntityDbContext dc, bool fullLoad = false)
+        public static async Task LoadRecords(this View dm, Database dc, bool fullLoad = false)
         {
             var query = dm.Bundle.QueryRecords(dc);
 
@@ -82,7 +83,7 @@ namespace CustomEntityFoundation.Views
             dm.Result.Items = items;
         }
 
-        public static void ExtractViewFilters(this View view, EntityDbContext dc, JObject model)
+        public static void ExtractViewFilters(this View view, Database dc, JObject model)
         {
             model["filters"].Children().ToList().ForEach(filter =>
             {

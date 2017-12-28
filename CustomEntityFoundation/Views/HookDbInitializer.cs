@@ -7,6 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using CustomEntityFoundation;
+using EntityFrameworkCore.BootKit;
 
 namespace CustomEntityFoundation.Views
 {
@@ -14,9 +15,9 @@ namespace CustomEntityFoundation.Views
     {
         public int Priority => 110;
 
-        public void Load(IConfiguration config, EntityDbContext dc)
+        public void Load(IConfiguration config, Database dc)
         {
-            Directory.GetFiles(EntityDbContext.Options.ContentRootPath + "\\App_Data\\DbInitializer", "*.Views.json")
+            Directory.GetFiles(CefOptions.ContentRootPath + "\\App_Data\\DbInitializer", "*.Views.json")
                 .ToList()
                 .ForEach(path =>
                 {
@@ -30,7 +31,7 @@ namespace CustomEntityFoundation.Views
                 });
         }
 
-        private void InitViews(EntityDbContext dc, List<JToken> jViews)
+        private void InitViews(Database dc, List<JToken> jViews)
         {
             jViews.ForEach(jView => {
                 var dmView =jView.ToObject<View>();

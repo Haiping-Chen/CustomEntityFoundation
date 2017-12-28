@@ -1,5 +1,6 @@
 ﻿using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Utilities;
+using EntityFrameworkCore.BootKit;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -25,7 +26,7 @@ namespace CustomEntityFoundation.Fields
         /// <returns>list of base field type, like TextField</returns>
         public static List<Type> FieldTypes()
         {
-            var fieldRepositories = TypeHelper.GetClassesWithInterface<IFieldRepository>(EntityDbContext.Assembles).ToList();
+            var fieldRepositories = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles).ToList();
             return fieldRepositories.Select(x => x.BaseType).Distinct().ToList();
         }
 
@@ -42,7 +43,7 @@ namespace CustomEntityFoundation.Fields
                 .ToList();
         }
 
-        public List<Object> Load(EntityDbContext dc, String entityName, String fieldTypeName)
+        public List<Object> Load(Database dc, String entityName, String fieldTypeName)
         {
             var fields = dc.Table($"{entityName}{fieldTypeName}Field").Where(x => (x as FieldRepository).EntityId == EntityId && (x as FieldRepository).BundleFieldId == BundleFieldId).ToList();
             return fields.Select(x => x).ToList();
@@ -103,6 +104,7 @@ namespace CustomEntityFoundation.Fields
         public virtual Object GetFieldData(Object data)
         {
             var d = JObject.FromObject(data);
+
             d.Remove("BundleFieldId");
             d.Remove("EntityId");
             d.Remove("UpdatedTime");

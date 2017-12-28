@@ -9,7 +9,7 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest
 {
     [TestClass]
-    public class FieldTypeTest : Database
+    public class FieldTypeTest : TestEssential
     {
         [TestMethod]
         public void FieldTypesTest()

@@ -17,5 +17,10 @@ namespace CustomEntityFoundation.Fields
 
         [MaxLength(256)]
         public string Path { get; set; }
+
+        public override object GetFieldData(object data)
+        {
+            return data == null ? new FileField() : base.GetFieldData(data);
+        }
     }
 }

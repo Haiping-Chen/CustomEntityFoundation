@@ -8,7 +8,7 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest.Nodes
 {
     [TestClass]
-    public class NodeSchemaTest : Database
+    public class NodeSchemaTest : TestEssential
     {
         [TestMethod]
         public void SchemaTest()

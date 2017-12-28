@@ -1,5 +1,6 @@
 ﻿using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Fields;
+using EntityFrameworkCore.BootKit;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace CustomEntityFoundation.Bundles
 {
     public static class BundleExtension
     {
-        public static FieldInBundle AddField(this Bundle bundle, EntityDbContext dc, FieldInBundle field)
+        public static FieldInBundle AddField(this Bundle bundle, Database dc, FieldInBundle field)
         {
             if (field.IsExist<FieldInBundle>(dc)) return field;
 
@@ -19,7 +20,7 @@ namespace CustomEntityFoundation.Bundles
                 field.UpdatedTime = DateTime.UtcNow;
             }
 
-            dc.FieldInBundle.Add(field);
+            dc.Table<FieldInBundle>().Add(field);
             return field;
         }
     }

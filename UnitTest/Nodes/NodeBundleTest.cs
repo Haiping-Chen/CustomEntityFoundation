@@ -12,7 +12,7 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest
 {
     [TestClass]
-    public class NodeBundleTest : Database
+    public class NodeBundleTest : TestEssential
     {
         [TestMethod]
         public void CreateNodeRecordTest()
@@ -31,7 +31,7 @@ namespace CustomEntityFoundation.UnitTest
         [TestMethod]
         public void CheckNodeFieldsTest()
         {
-            var bundle = dc.Bundle.Find(PizzaOrder.BUNDLE_ID_PIZZA_ORDER);
+            var bundle = dc.Table<Bundle>().Find(PizzaOrder.BUNDLE_ID_PIZZA_ORDER);
             var fields = bundle.GetFields(dc);
 
             Assert.IsTrue(fields.Count == 6);

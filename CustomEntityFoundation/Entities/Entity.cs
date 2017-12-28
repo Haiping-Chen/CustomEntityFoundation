@@ -12,7 +12,7 @@ namespace CustomEntityFoundation.Entities
 {
     public abstract class Entity : DbRecord
     {
-        private static List<IEntityNotification> instancesInCore = TypeHelper.GetInstanceWithInterface<IEntityNotification>(EntityDbContext.Assembles);
+        private static List<IEntityNotification> instancesInCore = TypeHelper.GetInstanceWithInterface<IEntityNotification>(CefOptions.Assembles);
 
         public Entity()
         {
@@ -70,7 +70,7 @@ namespace CustomEntityFoundation.Entities
             return type.Name;
         }
 
-        public virtual bool IsExist<T>(EntityDbContext dc) where T : Entity
+        public virtual bool IsExist<T>(Database dc) where T : Entity
         {
             return dc.Table<T>().Any(x => x.Id == Id);
         }

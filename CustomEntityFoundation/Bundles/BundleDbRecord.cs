@@ -1,6 +1,7 @@
 ﻿using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Fields;
 using CustomEntityFoundation.Utilities;
+using EntityFrameworkCore.BootKit;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,11 @@ namespace CustomEntityFoundation.Bundles
         [NotMapped]
         public List<FieldInBundle> Fields { get; set; }
 
-        public virtual void LoadEntity(EntityDbContext dc, String entityName)
+        public virtual void LoadEntity(Database dc, String entityName)
         {
             LoadFieldsDefinition(dc);
 
-            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(EntityDbContext.Assembles)
+            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles)
                 .Where(x => x.Name.StartsWith(entityName) && x.Name.EndsWith("Field")).ToList();
 
             types.ForEach(fieldType => LoadFieldRecords(dc, entityName, fieldType));
@@ -41,7 +42,7 @@ namespace CustomEntityFoundation.Bundles
             return fieldType.GetFieldTypeName();
         }
 
-        private void LoadFieldRecords(EntityDbContext dc, string entityName, Type fieldType)
+        private void LoadFieldRecords(Database dc, string entityName, Type fieldType)
         {
             FieldTypeAttribute fieldTypeAttribute = fieldType.BaseType.GetCustomAttributes(typeof(FieldTypeAttribute), false).First() as FieldTypeAttribute;
             String fieldTypeName = fieldTypeAttribute.GetFieldTypeName();
@@ -55,7 +56,7 @@ namespace CustomEntityFoundation.Bundles
                 });
         }
 
-        private void AddFieldRecords(EntityDbContext dc, Type fieldType)
+        private void AddFieldRecords(Database dc, Type fieldType)
         {
             FieldTypeAttribute fieldTypeAttribute = fieldType.BaseType.GetCustomAttributes(typeof(FieldTypeAttribute), false).First() as FieldTypeAttribute;
             String fieldTypeName = fieldTypeAttribute.GetFieldTypeName();
@@ -72,7 +73,7 @@ namespace CustomEntityFoundation.Bundles
                 });
         }
 
-        public virtual bool InsertEntity(EntityDbContext dc, String entityName)
+        public virtual bool InsertEntity(Database dc, String entityName)
         {
             if (dc.Table(entityName).Any(x => (x as Entity).Id == Id)) return false;
 
@@ -80,7 +81,7 @@ namespace CustomEntityFoundation.Bundles
 
             LoadFieldsDefinition(dc);
 
-            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(EntityDbContext.Assembles)
+            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles)
                 .Where(x => x.Name.StartsWith(entityName) && x.Name.EndsWith("Field")).ToList();
 
             types.ForEach(fieldType => {
@@ -90,11 +91,11 @@ namespace CustomEntityFoundation.Bundles
             return true;
         }
 
-        public virtual JObject ToBusinessObject(EntityDbContext dc, String entityName)
+        public virtual JObject ToBusinessObject(Database dc, String entityName)
         {
             JObject jo = JObject.FromObject(this);
 
-            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(EntityDbContext.Assembles)
+            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles)
                 .Where(x => x.Name.StartsWith(entityName) && x.Name.EndsWith("Field")).ToList();
 
             types.ForEach(fieldType => {
@@ -107,7 +108,7 @@ namespace CustomEntityFoundation.Bundles
             return jo;
         }
 
-        private void ToBusinessObject(EntityDbContext dc, Type fieldType, JObject businessObject)
+        private void ToBusinessObject(Database dc, Type fieldType, JObject businessObject)
         {
             LoadFieldsDefinition(dc);
 
@@ -124,7 +125,7 @@ namespace CustomEntityFoundation.Bundles
                 });
         }
 
-        protected void ToBusinessObject<TFieldRepository>(EntityDbContext dc, JObject businessObject) where TFieldRepository : IFieldRepository
+        protected void ToBusinessObject<TFieldRepository>(Database dc, JObject businessObject) where TFieldRepository : IFieldRepository
         {
             LoadFieldsDefinition(dc);
 
@@ -138,11 +139,11 @@ namespace CustomEntityFoundation.Bundles
                 });
         }
 
-        public void LoadFieldsDefinition(EntityDbContext dc)
+        public void LoadFieldsDefinition(Database dc)
         {
             if (Fields == null)
             {
-                Fields = dc.FieldInBundle.Where(x => x.BundleId == BundleId).ToList();
+                Fields = dc.Table<FieldInBundle>().Where(x => x.BundleId == BundleId).ToList();
             }
         }
     }

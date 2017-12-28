@@ -9,6 +9,7 @@ using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Bundles;
 using Newtonsoft.Json.Linq;
 using CustomEntityFoundation.Fields;
+using EntityFrameworkCore.BootKit;
 
 namespace CustomEntityFoundation.RestApi.Bundles
 {
@@ -39,7 +40,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         [HttpGet("{bundleId}")]
         public IActionResult GetBundleSchema([FromRoute] string bundleId)
         {
-            var bundleEntity = dc.Bundle.Include(x => x.Actions).First(x => x.Id == bundleId);
+            var bundleEntity = dc.Table<Bundle>().Include(x => x.Actions).First(x => x.Id == bundleId);
 
             if (bundleEntity == null)
             {
@@ -50,8 +51,8 @@ namespace CustomEntityFoundation.RestApi.Bundles
 
             bundleEntity.Fields.ForEach(field => {
 
-                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", EntityDbContext.Assembles);
-                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", EntityDbContext.Assembles) as FieldRepository;
+                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", CefOptions.Assembles);
+                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", CefOptions.Assembles) as FieldRepository;
 
                 field.Records = new List<Object>() { fieldInstance.GetFieldData(null) };
             });
@@ -68,7 +69,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         {
             List<String> bundlableEntities = new List<string>();
 
-            List<Type> core = TypeHelper.GetClassesWithInterface<IBundlableEntity>(EntityDbContext.Assembles);
+            List<Type> core = TypeHelper.GetClassesWithInterface<IBundlableEntity>(CefOptions.Assembles);
             core.ForEach(type => {
                 bundlableEntities.Add(type.Name.Replace("Entity", ""));
             });

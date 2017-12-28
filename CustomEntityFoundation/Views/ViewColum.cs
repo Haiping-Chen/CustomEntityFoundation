@@ -26,7 +26,7 @@ namespace CustomEntityFoundation.Views
         [MaxLength(32)]
         public String FieldType { get; set; }
 
-        public override bool IsExist<T>(EntityDbContext dc)
+        public override bool IsExist<T>(Database dc)
         {
             return dc.Table<ViewColum>().Any(x => x.ViewId == ViewId && x.FieldName == FieldName);
         }

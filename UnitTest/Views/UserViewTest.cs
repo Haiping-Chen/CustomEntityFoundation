@@ -8,7 +8,7 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest.Views
 {
     [TestClass]
-    public class UserViewTest : Database
+    public class UserViewTest : TestEssential
     {
         public void LoadRecordsTest()
         {

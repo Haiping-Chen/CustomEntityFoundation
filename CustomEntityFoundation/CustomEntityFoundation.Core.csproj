@@ -10,11 +10,11 @@
     <PackageProjectUrl>https://github.com/Haiping-Chen/CustomEntityFoundation</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Haiping-Chen/CustomEntityFoundation</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReleaseNotes>Hide value for property marked as password datatype.</PackageReleaseNotes>
+    <PackageReleaseNotes>Remove EntityDbContext.</PackageReleaseNotes>
     <PackageTags>EntityFramework, EntityFrameworkCore, Custom Entity, Content Management</PackageTags>
-    <Version>2.1.1</Version>
-    <AssemblyVersion>2.1.1.0</AssemblyVersion>
-    <FileVersion>2.1.1.0</FileVersion>
+    <Version>2.3.0</Version>
+    <AssemblyVersion>2.3.0.0</AssemblyVersion>
+    <FileVersion>2.3.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

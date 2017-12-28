@@ -13,12 +13,12 @@ using System.Text;
 namespace CustomEntityFoundation.UnitTest.Nodes
 {
     [TestClass]
-    public class NodeQueryTest : Database
+    public class NodeQueryTest : TestEssential
     {
         [TestMethod]
         public void QueryTest1()
         {
-            var bundle = dc.Bundle.Find(PizzaOrder.BUNDLE_ID_PIZZA_ORDER);
+            var bundle = dc.Table<Bundle>().Find(PizzaOrder.BUNDLE_ID_PIZZA_ORDER);
             var record = bundle.QueryRecords(dc).First();
             Assert.IsNotNull(record.Id);
         }

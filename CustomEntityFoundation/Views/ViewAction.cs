@@ -63,7 +63,7 @@ namespace CustomEntityFoundation.Views
         [MaxLength(64)]
         public String RedirectUrl { get; set; }
 
-        public override bool IsExist<T>(EntityDbContext dc)
+        public override bool IsExist<T>(Database dc)
         {
             return dc.Table<ViewAction>().Any(x => x.ViewId == ViewId && x.Name == Name);
         }

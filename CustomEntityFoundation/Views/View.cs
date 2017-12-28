@@ -28,7 +28,7 @@ namespace CustomEntityFoundation.Views
 
         public List<ViewFilter> Filters { get; set; }
 
-        public override bool IsExist<T>(EntityDbContext dc)
+        public override bool IsExist<T>(Database dc)
         {
             return dc.Table<View>().Any(x => x.Name == Name);
         }
