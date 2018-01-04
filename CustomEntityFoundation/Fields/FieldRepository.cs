@@ -46,7 +46,7 @@ namespace CustomEntityFoundation.Fields
         public List<Object> Load(Database dc, String entityName, String fieldTypeName)
         {
             var fields = dc.Table($"{entityName}{fieldTypeName}Field").Where(x => (x as FieldRepository).EntityId == EntityId && (x as FieldRepository).BundleFieldId == BundleFieldId).ToList();
-            return fields.Select(x => x).ToList();
+            return fields.Select(x => (Object)x).ToList();
         }
 
         public List<Object> Extract(String entityId, FieldInBundle field, JToken jo, Type joType)

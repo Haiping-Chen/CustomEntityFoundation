@@ -34,22 +34,22 @@ namespace CustomEntityFoundation.RestApi.Views
         }
 
         [HttpPost("{viewId}/execute")]
-        public async Task<View> ExecuteByFilter([FromRoute] string viewId, [FromBody] JObject filters, [FromQuery] int page = 1, [FromQuery] int size = 10)
+        public View ExecuteByFilter([FromRoute] string viewId, [FromBody] JObject filters, [FromQuery] int page = 1, [FromQuery] int size = 10)
         {
             var view = new View { Id = viewId }.LoadDefinition(dc);
             view.Result = new PageResult<Object> { Page = page, Size = size, Items = new List<Object>() };
             view.ExtractViewFilters(dc, filters);
-            await view.LoadRecords(dc);
+            view.LoadRecords(dc);
 
             return view;
         }
 
         [HttpGet("{viewId}/execute")]
-        public async Task<View> Execute([FromRoute] string viewId, [FromQuery] int page = 1, [FromQuery] int size = 10)
+        public View Execute([FromRoute] string viewId, [FromQuery] int page = 1, [FromQuery] int size = 10)
         {
             var view = new View { Id = viewId }.LoadDefinition(dc);
             view.Result = new PageResult<Object> { Page = page, Size = size, Items = new List<Object>() };
-            await view.LoadRecords(dc);
+            view.LoadRecords(dc);
 
             return view;
         }

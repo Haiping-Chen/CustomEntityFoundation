@@ -45,7 +45,7 @@ namespace CustomEntityFoundation.Views
         /// <param name="dm"></param>
         /// <param name="dc"></param>
         /// <returns></returns>
-        public static async Task LoadRecords(this View dm, Database dc, bool fullLoad = false)
+        public static void LoadRecords(this View dm, Database dc, bool fullLoad = false)
         {
             var query = dm.Bundle.QueryRecords(dc);
 

@@ -1,8 +1,10 @@
 ﻿using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Fields;
 using EntityFrameworkCore.BootKit;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CustomEntityFoundation.Bundles
@@ -22,6 +24,11 @@ namespace CustomEntityFoundation.Bundles
 
             dc.Table<FieldInBundle>().Add(field);
             return field;
+        }
+
+        public static Bundle Bundle(this Database dc, String bundleId)
+        {
+            return dc.Table<Bundle>().Include(x => x.Fields).FirstOrDefault(x => x.Id == bundleId);
         }
     }
 }
