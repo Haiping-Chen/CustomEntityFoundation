@@ -1,4 +1,5 @@
 ﻿using CustomEntityFoundation.Bundles;
+using EntityFrameworkCore.BootKit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

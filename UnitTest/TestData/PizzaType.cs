@@ -1,5 +1,6 @@
 ﻿using CustomEntityFoundation.Bundles;
 using CustomEntityFoundation.Fields;
+using EntityFrameworkCore.BootKit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;

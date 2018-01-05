@@ -2,6 +2,7 @@
 using CustomEntityFoundation.Fields;
 using CustomEntityFoundation.UnitTest.TestData;
 using CustomEntityFoundation.Utilities;
+using EntityFrameworkCore.BootKit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

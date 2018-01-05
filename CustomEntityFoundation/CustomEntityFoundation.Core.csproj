@@ -18,15 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.BootKit" Version="1.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\EntityFrameworkCore.BootKit\EntityFrameworkCore.BootKit\EntityFrameworkCore.BootKit.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CustomEntityFoundation.Bundles;
 using CustomEntityFoundation.Fields;
+using EntityFrameworkCore.BootKit;
 
 namespace CustomEntityFoundation.RestApi.Fields
 {
