@@ -10,6 +10,7 @@ using CustomEntityFoundation.Bundles;
 using Newtonsoft.Json.Linq;
 using CustomEntityFoundation.Fields;
 using EntityFrameworkCore.BootKit;
+using DotNetToolkit;
 
 namespace CustomEntityFoundation.RestApi.Bundles
 {
@@ -51,8 +52,8 @@ namespace CustomEntityFoundation.RestApi.Bundles
 
             bundleEntity.Fields.ForEach(field => {
 
-                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", CefOptions.Assembles);
-                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", CefOptions.Assembles) as FieldRepository;
+                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", Database.Assemblies);
+                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", Database.Assemblies) as FieldRepository;
 
                 field.Records = new List<Object>() { fieldInstance.GetFieldData(null) };
             });
@@ -69,7 +70,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         {
             List<String> bundlableEntities = new List<string>();
 
-            List<Type> core = TypeHelper.GetClassesWithInterface<IBundlableEntity>(CefOptions.Assembles);
+            List<Type> core = TypeHelper.GetClassesWithInterface<IBundlableEntity>(Database.Assemblies);
             core.ForEach(type => {
                 bundlableEntities.Add(type.Name.Replace("Entity", ""));
             });

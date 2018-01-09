@@ -1,5 +1,6 @@
 ﻿using CustomEntityFoundation.Bundles;
 using CustomEntityFoundation.Utilities;
+using DotNetToolkit;
 using EntityFrameworkCore.BootKit;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -49,7 +50,7 @@ namespace CustomEntityFoundation.Views
         {
             var query = dm.Bundle.QueryRecords(dc);
 
-            dm.Result.LoadData(query);
+            dm.Result.LoadRecords(query);
 
             var columns = fullLoad ?
                         dm.Bundle.Fields.Select(x => new { FieldName = x.Name }).ToList()

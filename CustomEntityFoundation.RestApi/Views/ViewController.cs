@@ -1,6 +1,6 @@
-﻿using CustomEntityFoundation.Models;
-using CustomEntityFoundation.Utilities;
+﻿using CustomEntityFoundation.Utilities;
 using CustomEntityFoundation.Views;
+using DotNetToolkit;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
@@ -30,7 +30,7 @@ namespace CustomEntityFoundation.RestApi.Views
                 query = query.Where(x => x.Name.Contains(name));
             }
 
-            return new PageResult<View>() { Page = page }.LoadData(query);
+            return new PageResult<View>() { Page = page }.LoadRecords(query);
         }
 
         [HttpPost("{viewId}/execute")]

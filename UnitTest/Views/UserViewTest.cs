@@ -1,5 +1,5 @@
-﻿using CustomEntityFoundation.Models;
-using CustomEntityFoundation.Views;
+﻿using CustomEntityFoundation.Views;
+using DotNetToolkit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

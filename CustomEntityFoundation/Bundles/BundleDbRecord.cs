@@ -1,6 +1,7 @@
 ﻿using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Fields;
 using CustomEntityFoundation.Utilities;
+using DotNetToolkit;
 using EntityFrameworkCore.BootKit;
 using Newtonsoft.Json.Linq;
 using System;
@@ -30,7 +31,7 @@ namespace CustomEntityFoundation.Bundles
         {
             LoadFieldsDefinition(dc);
 
-            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles)
+            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(Database.Assemblies)
                 .Where(x => x.Name.StartsWith(entityName) && x.Name.EndsWith("Field")).ToList();
 
             types.ForEach(fieldType => LoadFieldRecords(dc, entityName, fieldType));
@@ -81,7 +82,7 @@ namespace CustomEntityFoundation.Bundles
 
             LoadFieldsDefinition(dc);
 
-            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles)
+            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(Database.Assemblies)
                 .Where(x => x.Name.StartsWith(entityName) && x.Name.EndsWith("Field")).ToList();
 
             types.ForEach(fieldType => {
@@ -95,7 +96,7 @@ namespace CustomEntityFoundation.Bundles
         {
             JObject jo = JObject.FromObject(this);
 
-            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(CefOptions.Assembles)
+            var types = TypeHelper.GetClassesWithInterface<IFieldRepository>(Database.Assemblies)
                 .Where(x => x.Name.StartsWith(entityName) && x.Name.EndsWith("Field")).ToList();
 
             types.ForEach(fieldType => {

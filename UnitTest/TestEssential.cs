@@ -16,16 +16,15 @@ namespace CustomEntityFoundation.UnitTest
 
         public TestEssential()
         {
-            CefOptions.ContentRootPath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\..\\App_Data";
-            CefOptions.Assembles = new string[] { "CustomEntityFoundation.Core" };
+            Database.ContentRootPath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\..\\App_Data";
+            Database.Assemblies = new string[] { "CustomEntityFoundation.Core" };
 
             dc = new Database();
 
             dc.BindDbContext<IDbRecord, DbContext4Sqlite>(new DatabaseBind
             {
-                MasterConnection = new SqliteConnection($"Data Source={CefOptions.ContentRootPath}\\content.db"),
-                CreateDbIfNotExist = true,
-                AssemblyNames = CefOptions.Assembles
+                MasterConnection = new SqliteConnection($"Data Source={Database.ContentRootPath}\\content.db"),
+                CreateDbIfNotExist = true
             });
         }
     }

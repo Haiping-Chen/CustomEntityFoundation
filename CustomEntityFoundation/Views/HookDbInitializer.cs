@@ -17,7 +17,7 @@ namespace CustomEntityFoundation.Views
 
         public void Load(IConfiguration config, Database dc)
         {
-            Directory.GetFiles(CefOptions.ContentRootPath + "\\App_Data\\DbInitializer", "*.Views.json")
+            Directory.GetFiles(Database.ContentRootPath + "\\App_Data\\DbInitializer", "*.Views.json")
                 .ToList()
                 .ForEach(path =>
                 {

@@ -1,6 +1,6 @@
 ﻿using CustomEntityFoundation.Bundles;
 using CustomEntityFoundation.Entities;
-using CustomEntityFoundation.Models;
+using DotNetToolkit;
 using EntityFrameworkCore.BootKit;
 using System;
 using System.Collections.Generic;

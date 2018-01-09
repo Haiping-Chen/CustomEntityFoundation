@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using CustomEntityFoundation.Utilities;
+using DotNetToolkit;
 using Newtonsoft.Json.Linq;
 
 namespace CustomEntityFoundation.Fields

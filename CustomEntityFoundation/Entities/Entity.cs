@@ -1,4 +1,5 @@
 ﻿using CustomEntityFoundation.Utilities;
+using DotNetToolkit;
 using EntityFrameworkCore.BootKit;
 using EntityFrameworkCore.Triggers;
 using System;
@@ -12,7 +13,7 @@ namespace CustomEntityFoundation.Entities
 {
     public abstract class Entity : DbRecord
     {
-        private static List<IEntityNotification> instancesInCore = TypeHelper.GetInstanceWithInterface<IEntityNotification>(CefOptions.Assembles);
+        private static List<IEntityNotification> instancesInCore = TypeHelper.GetInstanceWithInterface<IEntityNotification>(Database.Assemblies);
 
         public Entity()
         {

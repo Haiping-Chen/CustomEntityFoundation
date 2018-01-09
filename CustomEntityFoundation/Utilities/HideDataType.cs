@@ -1,4 +1,5 @@
 ﻿using CustomEntityFoundation.Bundles;
+using DotNetToolkit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
