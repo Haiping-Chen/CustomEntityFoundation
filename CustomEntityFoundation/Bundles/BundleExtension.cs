@@ -18,7 +18,6 @@ namespace CustomEntityFoundation.Bundles
             if (String.IsNullOrEmpty(field.Id))
             {
                 field.Id = Guid.NewGuid().ToString();
-                field.Status = EntityStatus.Active;
                 field.UpdatedTime = DateTime.UtcNow;
             }
 

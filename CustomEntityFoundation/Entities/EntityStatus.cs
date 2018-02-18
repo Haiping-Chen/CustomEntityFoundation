@@ -24,7 +24,7 @@ namespace CustomEntityFoundation.Entities
         /// <summary>
         /// Hide to user
         /// </summary>
-        Hidden = 4,
+        Inactive = 4,
 
         /// <summary>
         /// Deleted

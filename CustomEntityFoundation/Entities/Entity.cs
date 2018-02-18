@@ -18,7 +18,6 @@ namespace CustomEntityFoundation.Entities
         public Entity()
         {
             UpdatedTime = DateTime.UtcNow;
-            Status = EntityStatus.Active;
         }
 
         static Entity()
@@ -26,7 +25,6 @@ namespace CustomEntityFoundation.Entities
             Triggers<Entity>.Inserting += entry =>
             {
                 entry.Entity.UpdatedTime = DateTime.UtcNow;
-                entry.Entity.Status = EntityStatus.Active;
             };
 
             Triggers<Entity>.Inserted += entry =>
@@ -59,11 +57,6 @@ namespace CustomEntityFoundation.Entities
 
             };
         }
-
-        public EntityStatus Status { get; set; }
-
-        [Required]
-        public DateTime UpdatedTime { get; set; }
 
         public virtual string GetEntityName()
         {

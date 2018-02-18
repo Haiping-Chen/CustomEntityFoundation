@@ -20,6 +20,15 @@ namespace CustomEntityFoundation.Views
 
         public Boolean HideName { get; set; }
 
+        /// <summary>
+        /// Convert as View Field Name
+        /// </summary>
+        [MaxLength(36)]
+        public String TargetName { get; set; }
+
+        /// <summary>
+        /// Bundle Field Name
+        /// </summary>
         [MaxLength(36)]
         public String FieldName { get; set; }
 

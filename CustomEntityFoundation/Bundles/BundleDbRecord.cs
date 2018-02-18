@@ -122,7 +122,7 @@ namespace CustomEntityFoundation.Bundles
                 {
                     var fieldInstance = Activator.CreateInstance(fieldType) as FieldRepository;
                     var fieldValue = fieldInstance.ToBusinessObject(field);
-                    businessObject.Add(field.Name, fieldValue == null ? null : JToken.FromObject(fieldValue));
+                    businessObject.Add(field.Name.FirstCharacterToUpper(), fieldValue == null ? null : JToken.FromObject(fieldValue));
                 });
         }
 

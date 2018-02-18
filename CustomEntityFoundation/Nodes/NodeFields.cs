@@ -14,4 +14,6 @@ namespace CustomEntityFoundation.Nodes
     public class NodeIntegerField : IntegerField, IDbRecord { }
 
     public class NodeBooleanField : BooleanField, IDbRecord { }
+
+    public class NodeAddressField : AddressField, IDbRecord { }
 }

@@ -124,6 +124,8 @@ namespace CustomEntityFoundation.Bundles
             // fill custom fields
             record.Fields.ForEach(field =>
             {
+                field.Name = field.Name.FirstCharacterToLower();
+
                 var fieldType = TypeHelper.GetClassesWithInterface<IFieldRepository>(Database.Assemblies).FirstOrDefault(x => x.Name == field.FieldTypeName + "Field");
                 if (fieldType == null)
                 {
@@ -133,7 +135,7 @@ namespace CustomEntityFoundation.Bundles
                 {
                     var fieldInstance = (FieldRepository)Activator.CreateInstance(fieldType);
                     fieldInstance.BundleFieldId = field.Id;
-                    field.Records = fieldInstance.Extract(record.Id, field, jEntity[field.Name], fieldType);
+                    field.Records = fieldInstance.Extract(record.Id, field, jEntity.GetValue(field.Name, StringComparison.CurrentCultureIgnoreCase), fieldType);
                 }
             });
 

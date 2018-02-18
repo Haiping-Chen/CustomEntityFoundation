@@ -23,7 +23,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         [HttpGet]
         public IEnumerable<Object> GetBundles()
         {
-            return dc.Table<Bundle>().Where(x => x.Status == EntityStatus.Active)
+            return dc.Table<Bundle>()
                 .Select(x => new
                 {
                     x.Id,

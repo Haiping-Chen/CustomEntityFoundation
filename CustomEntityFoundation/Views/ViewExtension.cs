@@ -74,7 +74,8 @@ namespace CustomEntityFoundation.Views
                 {
                     if (!row.Children().Any(x => x.Path == column.FieldName))
                     {
-                        row.Add(column.FieldName, businessObject[column.FieldName]);
+                        var columnInView = dm.Columns.First(x => x.FieldName == column.FieldName);
+                        row.Add(columnInView.TargetName, businessObject[column.FieldName]);
                     }
                 });
 

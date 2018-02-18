@@ -101,7 +101,6 @@ namespace CustomEntityFoundation.UnitTest.TestData
 
             var loadedNode = dc.Table<Bundle>().Find(node.BundleId).LoadRecord(dc, node.Id);
 
-            Assert.IsTrue(loadedNode.Status == EntityStatus.Active);
             Assert.IsTrue(loadedNode.UpdatedTime.Date == DateTime.UtcNow.Date);
             Assert.IsTrue(loadedNode.Name == record["Name"].ToString());
 
