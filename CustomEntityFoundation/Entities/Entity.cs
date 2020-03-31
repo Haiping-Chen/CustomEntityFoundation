@@ -13,18 +13,18 @@ namespace CustomEntityFoundation.Entities
 {
     public abstract class Entity : DbRecord
     {
-        private static List<IEntityNotification> instancesInCore = TypeHelper.GetInstanceWithInterface<IEntityNotification>(Database.Assemblies);
+        private static List<IEntityNotification> instancesInCore = TypeHelper.GetInstanceWithInterface<IEntityNotification>("CustomEntityFoundation.Core");
 
         public Entity()
         {
-            UpdatedTime = DateTime.UtcNow;
+            
         }
 
         static Entity()
         {
             Triggers<Entity>.Inserting += entry =>
             {
-                entry.Entity.UpdatedTime = DateTime.UtcNow;
+                
             };
 
             Triggers<Entity>.Inserted += entry =>
@@ -44,7 +44,7 @@ namespace CustomEntityFoundation.Entities
 
             Triggers<Entity>.Updating += entry =>
             {
-                entry.Entity.UpdatedTime = DateTime.UtcNow;
+                
             };
 
             Triggers<Entity>.Updated += entry =>

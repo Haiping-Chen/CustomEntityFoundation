@@ -16,7 +16,7 @@ namespace CustomEntityFoundation.Bundles
 
         public void Load(IConfiguration config, Database dc)
         {
-            Directory.GetFiles(Database.ContentRootPath + "\\App_Data\\DbInitializer", "*.Bundles.json")
+            Directory.GetFiles("\\App_Data\\DbInitializer", "*.Bundles.json")
                 .ToList()
                 .ForEach(path =>
                 {

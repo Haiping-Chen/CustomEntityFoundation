@@ -16,14 +16,11 @@ namespace CustomEntityFoundation.UnitTest
 
         public TestEssential()
         {
-            Database.ContentRootPath = $"{Directory.GetCurrentDirectory()}\\..\\..\\..\\..\\App_Data";
-            Database.Assemblies = new string[] { "CustomEntityFoundation.Core" };
-
             dc = new Database();
 
             dc.BindDbContext<IDbRecord, DbContext4Sqlite>(new DatabaseBind
             {
-                MasterConnection = new SqliteConnection($"Data Source={Database.ContentRootPath}\\content.db"),
+                MasterConnection = new SqliteConnection($"Data Source=content.db"),
                 CreateDbIfNotExist = true
             });
         }

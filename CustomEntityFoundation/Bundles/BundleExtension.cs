@@ -18,7 +18,6 @@ namespace CustomEntityFoundation.Bundles
             if (String.IsNullOrEmpty(field.Id))
             {
                 field.Id = Guid.NewGuid().ToString();
-                field.UpdatedTime = DateTime.UtcNow;
             }
 
             dc.Table<FieldInBundle>().Add(field);

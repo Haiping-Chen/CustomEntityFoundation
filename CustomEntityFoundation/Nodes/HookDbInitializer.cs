@@ -16,7 +16,7 @@ namespace CustomEntityFoundation.Nodes
 
         public void Load(IConfiguration config, Database dc)
         {
-            Directory.GetFiles(Database.ContentRootPath + "\\App_Data\\DbInitializer", "*.Nodes.json")
+            Directory.GetFiles("\\App_Data\\DbInitializer", "*.Nodes.json")
                 .ToList()
                 .ForEach(path =>
                 {

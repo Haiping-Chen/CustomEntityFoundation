@@ -53,7 +53,7 @@ namespace CustomEntityFoundation.Bundles
         public Type GetEntityType(Database dc)
         {
             var entityName = dc.Table<Bundle>().Find(Id).EntityName;
-            var entityType = TypeHelper.GetClassesWithInterface<IBundlableEntity>(Database.Assemblies).FirstOrDefault(x => x.Name == entityName);
+            var entityType = TypeHelper.GetClassesWithInterface<IBundlableEntity>("CustomEntityFoundation.Core").FirstOrDefault(x => x.Name == entityName);
             return entityType;
         }
 
@@ -86,7 +86,7 @@ namespace CustomEntityFoundation.Bundles
 
         public IQueryable<BundleDbRecord> QueryRecords(Database dc)
         {
-            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(Database.Assemblies).FirstOrDefault(x => x.Name == EntityName);
+            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>("CustomEntityFoundation.Core").FirstOrDefault(x => x.Name == EntityName);
 
             if(type == null)
             {
@@ -112,7 +112,7 @@ namespace CustomEntityFoundation.Bundles
         /// <param name="jEntity"></param>
         public BundleDbRecord AddRecord(Database dc, JObject jEntity)
         {
-            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>(Database.Assemblies).FirstOrDefault(x => x.Name == EntityName);
+            var type = TypeHelper.GetClassesWithInterface<IBundlableEntity>("CustomEntityFoundation.Core").FirstOrDefault(x => x.Name == EntityName);
 
             // extract data to main object, fill field record later.
             var record = jEntity.ToObject(type) as BundleDbRecord;
@@ -126,7 +126,7 @@ namespace CustomEntityFoundation.Bundles
             {
                 field.Name = field.Name.FirstCharacterToLower();
 
-                var fieldType = TypeHelper.GetClassesWithInterface<IFieldRepository>(Database.Assemblies).FirstOrDefault(x => x.Name == field.FieldTypeName + "Field");
+                var fieldType = TypeHelper.GetClassesWithInterface<IFieldRepository>("CustomEntityFoundation.Core").FirstOrDefault(x => x.Name == field.FieldTypeName + "Field");
                 if (fieldType == null)
                 {
                     Console.WriteLine($"{field.FieldTypeName} field not found. Ignored {field.Name} column. {field.Id}");

@@ -27,7 +27,7 @@ namespace CustomEntityFoundation.Fields
         /// <returns>list of base field type, like TextField</returns>
         public static List<Type> FieldTypes()
         {
-            var fieldRepositories = TypeHelper.GetClassesWithInterface<IFieldRepository>(Database.Assemblies).ToList();
+            var fieldRepositories = TypeHelper.GetClassesWithInterface<IFieldRepository>("CustomEntityFoundation.Core").ToList();
             return fieldRepositories.Select(x => x.BaseType).Distinct().ToList();
         }
 

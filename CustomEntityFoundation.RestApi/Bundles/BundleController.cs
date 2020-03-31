@@ -4,10 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CustomEntityFoundation.Utilities;
-using CustomEntityFoundation.Entities;
 using CustomEntityFoundation.Bundles;
-using Newtonsoft.Json.Linq;
 using CustomEntityFoundation.Fields;
 using EntityFrameworkCore.BootKit;
 using DotNetToolkit;
@@ -52,8 +49,8 @@ namespace CustomEntityFoundation.RestApi.Bundles
 
             bundleEntity.Fields.ForEach(field => {
 
-                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", Database.Assemblies);
-                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", Database.Assemblies) as FieldRepository;
+                Type type = TypeHelper.GetType(field.FieldTypeName + "Field", "CustomEntityFoundation.Core");
+                var fieldInstance = TypeHelper.GetInstance(field.FieldTypeName + "Field", "CustomEntityFoundation.Core") as FieldRepository;
 
                 field.Records = new List<Object>() { fieldInstance.GetFieldData(null) };
             });
@@ -70,7 +67,7 @@ namespace CustomEntityFoundation.RestApi.Bundles
         {
             List<String> bundlableEntities = new List<string>();
 
-            List<Type> core = TypeHelper.GetClassesWithInterface<IBundlableEntity>(Database.Assemblies);
+            List<Type> core = TypeHelper.GetClassesWithInterface<IBundlableEntity>("CustomEntityFoundation.Core");
             core.ForEach(type => {
                 bundlableEntities.Add(type.Name.Replace("Entity", ""));
             });
